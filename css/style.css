@@ -19,9 +19,9 @@ body {
     font-family: 'Inter', -apple-system, sans-serif;
     background-color: var(--bg-color);
     color: var(--text-main);
-    overflow: hidden;
     width: 100vw;
     height: 100vh;
+    overflow: hidden; /* Prevent body scroll */
     -webkit-font-smoothing: antialiased;
 }
 
@@ -43,6 +43,8 @@ body {
     transition: opacity var(--transition-speed) ease-in-out;
     z-index: 1;
     background-color: var(--bg-color);
+    overflow-y: auto; /* Allow scrolling if content overflows */
+    overflow-x: hidden;
 }
 
 .slide.active {
@@ -54,13 +56,14 @@ body {
 /* Layouts */
 .content {
     width: 100%;
-    height: 100%;
+    min-height: 100%;
     display: flex;
 }
 
 .split-layout {
     display: flex;
     flex-direction: row;
+    min-height: 100vh;
 }
 
 .split-layout.reverse {
@@ -70,17 +73,19 @@ body {
 .center-content {
     justify-content: center;
     align-items: center;
+    min-height: 100vh;
 }
 
 /* Panels */
 .text-panel {
     flex: 1;
-    padding: 6rem;
+    padding: clamp(2rem, 5vw, 6rem);
     display: flex;
     flex-direction: column;
     justify-content: center;
     background-color: var(--bg-color);
     z-index: 2;
+    max-width: 100%;
 }
 
 .image-panel {
@@ -88,9 +93,9 @@ body {
     background-size: cover;
     background-position: center;
     position: relative;
+    min-height: 300px;
 }
 
-/* Add a subtle overlay to images for a more premium look */
 .image-panel::after {
     content: '';
     position: absolute;
@@ -101,10 +106,10 @@ body {
 /* Data Overlay on Images */
 .chart-overlay {
     position: absolute;
-    bottom: 3rem;
-    right: 3rem;
+    bottom: clamp(1rem, 3vw, 3rem);
+    right: clamp(1rem, 3vw, 3rem);
     background: rgba(255, 255, 255, 0.95);
-    padding: 1rem 1.5rem;
+    padding: clamp(0.5rem, 1.5vw, 1rem) clamp(1rem, 2vw, 1.5rem);
     border-radius: 4px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     display: flex;
@@ -118,7 +123,7 @@ body {
 .chart-overlay.green { border-left-color: #059669; }
 
 .chart-icon {
-    font-size: 1.5rem;
+    font-size: clamp(1.2rem, 2vw, 1.5rem);
     color: var(--primary-color);
 }
 .chart-overlay.red .chart-icon { color: var(--accent-red); }
@@ -126,13 +131,13 @@ body {
 
 .chart-text {
     font-weight: 600;
-    font-size: 1.1rem;
+    font-size: clamp(0.9rem, 1.5vw, 1.1rem);
     color: var(--text-main);
 }
 
 /* Typography */
 .subtitle {
-    font-size: 0.9rem;
+    font-size: clamp(0.8rem, 1vw, 0.9rem);
     font-weight: 700;
     color: var(--text-muted);
     text-transform: uppercase;
@@ -141,7 +146,7 @@ body {
 }
 
 .title {
-    font-size: 4.5rem;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
     font-weight: 800;
     color: var(--text-main);
     line-height: 1.1;
@@ -149,16 +154,16 @@ body {
 }
 
 .main-question {
-    font-size: 2.2rem;
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
     font-weight: 700;
     color: var(--primary-color);
     line-height: 1.3;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     letter-spacing: -0.5px;
 }
 
 .speaker-name {
-    font-size: 0.85rem;
+    font-size: clamp(0.7rem, 1vw, 0.85rem);
     font-weight: 700;
     color: var(--primary-color);
     text-transform: uppercase;
@@ -170,11 +175,11 @@ body {
     height: 4px;
     width: 60px;
     background: var(--primary-color);
-    margin: 2rem 0;
+    margin: clamp(1rem, 2vw, 2rem) 0;
 }
 
 .impact-quote {
-    font-size: 1.6rem;
+    font-size: clamp(1.2rem, 2vw, 1.6rem);
     font-weight: 400;
     color: var(--text-muted);
     line-height: 1.6;
@@ -183,49 +188,80 @@ body {
 }
 
 .text-body {
-    font-size: 1.1rem;
+    font-size: clamp(0.95rem, 1.5vw, 1.1rem);
     line-height: 1.8;
     color: var(--text-main);
 }
 
 .text-body p {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.2rem;
 }
 
-/* Data Box - Ultra Minimalist */
+/* Data Box & Definitions */
 .data-box {
-    margin-top: 2rem;
+    margin-top: 1.5rem;
     padding: 1.5rem 0;
     border-top: 1px solid var(--border-color);
 }
 
-.data-box .data-title {
+.data-title {
     font-weight: 700;
-    font-size: 0.9rem;
+    font-size: clamp(0.85rem, 1.2vw, 0.9rem);
     text-transform: uppercase;
     letter-spacing: 1px;
     color: var(--primary-color);
     margin-bottom: 0.8rem;
 }
 
-.data-box.alert .data-title {
-    color: var(--accent-red);
-}
+.data-box.alert .data-title { color: var(--accent-red); }
 
 .data-box p {
-    font-size: 1.05rem;
+    font-size: clamp(0.9rem, 1.4vw, 1.05rem);
     color: var(--text-muted);
     margin-bottom: 0;
 }
 
-.data-box strong {
+.data-box strong { color: var(--text-main); }
+
+/* Glossary Panel */
+.glossary {
+    margin-top: 1.5rem;
+    background: var(--bg-alt);
+    padding: 1rem 1.5rem;
+    border-radius: 6px;
+    border-left: 3px solid #6b7280;
+}
+
+.glossary h4 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.glossary-item {
+    font-size: 0.9rem;
+    line-height: 1.5;
     color: var(--text-main);
+    margin-bottom: 0.5rem;
+}
+
+.glossary-item:last-child {
+    margin-bottom: 0;
+}
+
+.glossary-item strong {
+    color: var(--primary-color);
 }
 
 /* Circular Image for closing */
 .image-circle {
-    width: 150px;
-    height: 150px;
+    width: clamp(100px, 15vw, 150px);
+    height: clamp(100px, 15vw, 150px);
     border-radius: 50%;
     margin: 0 auto;
     background-size: cover;
@@ -234,27 +270,28 @@ body {
 
 /* Controls */
 .controls-container {
-    position: absolute;
-    bottom: 2.5rem;
-    left: 6rem;
+    position: fixed;
+    bottom: 2rem;
+    left: clamp(2rem, 5vw, 6rem);
     display: flex;
     align-items: center;
     gap: 1.5rem;
     z-index: 100;
-}
-
-.slide.active:nth-child(even) .controls-container {
-    /* If the layout is reversed, keep controls consistent */
+    background: rgba(255, 255, 255, 0.9);
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    border: 1px solid var(--border-color);
 }
 
 .nav-btn {
     background: transparent;
     border: 1px solid var(--border-color);
     color: var(--text-main);
-    width: 44px;
-    height: 44px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    font-size: 1rem;
+    font-size: 0.9rem;
     cursor: pointer;
     display: flex;
     justify-content: center;
@@ -271,7 +308,6 @@ body {
     opacity: 0.2;
     cursor: not-allowed;
     border-color: var(--border-color);
-    background: transparent;
 }
 
 .slide-counter {
@@ -283,17 +319,16 @@ body {
 
 /* Responsive */
 @media (max-width: 1024px) {
-    .text-panel { padding: 4rem; }
-    .title { font-size: 3.5rem; }
-    .main-question { font-size: 1.8rem; }
-    .controls-container { left: 4rem; }
+    .split-layout { flex-direction: column !important; min-height: auto; }
+    .text-panel { padding: 3rem 2rem; flex: none; height: auto; }
+    .image-panel { flex: none; height: 40vh; min-height: 250px; }
+    
+    .chart-overlay { bottom: 1rem; right: 1rem; padding: 0.5rem 1rem; }
+    .controls-container { left: 50%; transform: translateX(-50%); bottom: 1rem; position: fixed; }
 }
 
-@media (max-width: 768px) {
-    .split-layout { flex-direction: column !important; }
-    .text-panel { padding: 2rem; flex: 1; }
-    .image-panel { flex: 0.8; }
-    .title { font-size: 2.5rem; }
-    .controls-container { left: 50%; transform: translateX(-50%); bottom: 1rem; background: rgba(255,255,255,0.9); padding: 0.5rem 1rem; border-radius: 50px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-    .chart-overlay { bottom: 1rem; right: 1rem; padding: 0.5rem 1rem; }
+@media (max-width: 600px) {
+    .text-panel { padding: 2rem 1.5rem; padding-bottom: 6rem; } /* Space for fixed controls */
+    .image-panel { height: 30vh; }
+    .controls-container { width: auto; justify-content: center; }
 }
