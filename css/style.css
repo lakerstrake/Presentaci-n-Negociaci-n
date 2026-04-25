@@ -1,13 +1,13 @@
 :root {
     --primary-color: #0f4c81; 
     --text-main: #1a1a1a;
-    --text-muted: #4a4a4a;
+    --text-muted: #333333;
     --bg-color: #ffffff;
-    --bg-alt: #f1f5f9;
+    --bg-alt: #f8fafc;
     --border-color: #e2e8f0;
     --accent-red: #dc2626;
     --accent-green: #059669;
-    --transition-speed: 0.6s;
+    --transition-speed: 0.5s;
 }
 
 * {
@@ -76,23 +76,20 @@ body {
 }
 
 /* Panels */
-/* Distribuimos mejor el texto: 55% texto, 45% imagen para dar más espacio a las explicaciones */
 .text-panel {
     flex: 0 0 55%;
-    padding: 4% 5%; 
+    padding: 3vh 4vw; /* Responsive padding based on viewport */
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; /* Start from top so scrolling is natural */
+    justify-content: center; /* Vertically center content */
     background-color: var(--bg-color);
-    max-height: 100vh;
-    overflow-y: auto; /* Permite hacer scroll si el contenido es mucho */
+    height: 100vh;
+    overflow-y: auto; /* Fallback */
 }
 
-/* Smooth custom scrollbar for text panel */
-.text-panel::-webkit-scrollbar { width: 8px; }
-.text-panel::-webkit-scrollbar-track { background: transparent; }
-.text-panel::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; border: 2px solid var(--bg-color); }
-.text-panel::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+/* Very subtle scrollbar just in case */
+.text-panel::-webkit-scrollbar { width: 4px; }
+.text-panel::-webkit-scrollbar-thumb { background: #cbd5e1; }
 
 .image-panel {
     flex: 0 0 45%;
@@ -111,124 +108,120 @@ body {
 /* Data Overlay on Images */
 .chart-overlay {
     position: absolute;
-    top: 2rem;
-    left: 2rem;
+    top: 1.5rem;
+    left: 1.5rem;
     background: rgba(255, 255, 255, 0.95);
-    padding: 0.8rem 1.2rem;
+    padding: 0.6rem 1rem;
     border-radius: 4px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     display: flex;
     align-items: center;
-    gap: 0.8rem;
+    gap: 0.6rem;
     z-index: 5;
-    border-left: 4px solid var(--primary-color);
+    border-left: 3px solid var(--primary-color);
 }
 
 .chart-overlay.red { border-left-color: var(--accent-red); }
 .chart-overlay.green { border-left-color: var(--accent-green); }
-
-.chart-icon { font-size: 1.2rem; color: var(--primary-color); }
+.chart-icon { font-size: 1rem; color: var(--primary-color); }
 .chart-overlay.red .chart-icon { color: var(--accent-red); }
 .chart-overlay.green .chart-icon { color: var(--accent-green); }
+.chart-text { font-weight: 600; font-size: 0.85rem; color: var(--text-main); }
 
-.chart-text { font-weight: 600; font-size: 0.95rem; color: var(--text-main); }
-
-/* Typography */
+/* Typography - Much more compact */
 .subtitle {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     font-weight: 700;
     color: var(--text-muted);
     text-transform: uppercase;
-    letter-spacing: 1.5px;
+    letter-spacing: 1px;
     margin-bottom: 0.5rem;
-    margin-top: 1rem;
 }
 
 .title {
-    font-size: clamp(2.2rem, 3.5vw, 3.5rem);
+    font-size: clamp(2rem, 3.5vw, 3rem);
     font-weight: 800;
     color: var(--text-main);
     line-height: 1.1;
+    margin-bottom: 0.5rem;
     letter-spacing: -1px;
 }
 
 .main-question {
-    font-size: clamp(1.4rem, 2.2vw, 2.2rem);
+    font-size: clamp(1.4rem, 2.2vw, 1.8rem);
     font-weight: 700;
     color: var(--primary-color);
-    line-height: 1.25;
-    margin-bottom: 1rem;
+    line-height: 1.2;
+    margin-bottom: 0.8rem;
     letter-spacing: -0.5px;
 }
 
 .speaker-name {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     font-weight: 700;
     color: var(--primary-color);
     text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 1rem;
-    margin-top: 1rem;
+    letter-spacing: 1.5px;
+    margin-bottom: 0.5rem;
 }
 
 .divider {
     height: 3px;
-    width: 50px;
+    width: 40px;
     background: var(--primary-color);
-    margin: 1.2rem 0;
+    margin: 0.8rem 0;
 }
 
 .impact-quote {
-    font-size: clamp(1.1rem, 1.6vw, 1.4rem);
+    font-size: clamp(1rem, 1.4vw, 1.2rem);
     font-weight: 400;
     color: var(--text-muted);
-    line-height: 1.6;
+    line-height: 1.5;
     border-left: 3px solid var(--border-color);
-    padding-left: 1.2rem;
+    padding-left: 1rem;
 }
 
 .text-body {
-    font-size: clamp(0.95rem, 1.2vw, 1.1rem);
-    line-height: 1.6;
+    font-size: clamp(0.85rem, 1.1vw, 0.95rem); /* Extremely compact text to guarantee fit */
+    line-height: 1.5;
     color: var(--text-main);
 }
 
 .text-body p {
-    margin-bottom: 1rem;
+    margin-bottom: 0.6rem;
 }
 
-/* Data Box - Expanded with Logos */
+/* Data Box - Ultra compact */
 .data-box {
-    margin-top: 1rem;
-    padding: 1.2rem;
+    margin-top: 0.5rem;
+    padding: 0.8rem 1rem;
     background: var(--bg-alt);
-    border-radius: 8px;
+    border-radius: 6px;
     border-left: 4px solid var(--primary-color);
     display: flex;
     flex-direction: column;
-    gap: 0.8rem;
+    gap: 0.5rem;
 }
 
-.data-box.alert { border-left-color: var(--accent-red); background: #fef2f2; }
+.data-box.alert { border-left-color: var(--accent-red); background: #fff1f2; }
 .data-box.success { border-left-color: var(--accent-green); background: #f0fdf4; }
 
 .data-header {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 0.8rem;
 }
 
 .company-logo {
-    height: 30px;
-    max-width: 120px;
+    height: 24px; /* Scaled down logo */
+    max-width: 100px;
     object-fit: contain;
 }
 
 .data-title {
     font-weight: 700;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
     color: var(--primary-color);
 }
 
@@ -236,42 +229,40 @@ body {
 .data-box.success .data-title { color: var(--accent-green); }
 
 .data-box p {
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     color: var(--text-muted);
     margin-bottom: 0;
-    line-height: 1.5;
+    line-height: 1.4;
 }
-
-.data-box strong { color: var(--text-main); }
 
 /* Compact Glossary List */
 .glossary-list {
-    margin-top: 1.2rem;
-    font-size: 0.85rem;
+    margin-top: 0.8rem;
+    font-size: 0.8rem;
     color: var(--text-muted);
-    margin-bottom: 2rem;
 }
 .glossary-list div {
-    margin-bottom: 0.4rem;
-    padding-left: 0.6rem;
+    margin-bottom: 0.3rem;
+    padding-left: 0.5rem;
     border-left: 2px solid var(--border-color);
+    line-height: 1.3;
 }
 .glossary-list strong { color: var(--primary-color); }
 
 /* Circular Image for closing */
 .image-circle {
-    width: 120px; height: 120px;
+    width: 100px; height: 100px;
     border-radius: 50%;
     margin: 0 auto;
     background-size: cover;
     background-position: center;
 }
 
-/* Controls - Positioned over Image Panel to save text space */
+/* Controls */
 .controls-container {
     position: absolute;
-    bottom: 2rem;
-    right: 2rem;
+    bottom: 1.5rem;
+    right: 1.5rem;
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -286,10 +277,10 @@ body {
     background: transparent;
     border: none;
     color: var(--text-main);
-    width: 36px;
-    height: 36px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
-    font-size: 1rem;
+    font-size: 0.9rem;
     cursor: pointer;
     display: flex;
     justify-content: center;
@@ -298,7 +289,7 @@ body {
 }
 
 .nav-btn:hover {
-    background: var(--bg-alt);
+    background: #e2e8f0;
     color: var(--primary-color);
 }
 
@@ -308,7 +299,7 @@ body {
 }
 
 .slide-counter {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     font-weight: 600;
     color: var(--text-muted);
 }
@@ -316,8 +307,8 @@ body {
 /* Responsive Overrides */
 @media (max-width: 900px) {
     .split-layout { flex-direction: column !important; height: auto; min-height: 100vh; }
-    .text-panel { flex: none; width: 100%; padding: 2rem 1.5rem 6rem 1.5rem; height: auto; overflow-y: visible; }
+    .text-panel { flex: none; width: 100%; padding: 2rem 1.5rem 5rem 1.5rem; height: auto; overflow-y: visible; }
     .image-panel { flex: none; width: 100%; height: 40vh; min-height: 250px; }
     .controls-container { bottom: 1rem; right: 50%; transform: translateX(50%); }
-    .chart-overlay { top: 1rem; left: 1rem; padding: 0.5rem 0.8rem; }
+    .chart-overlay { top: 1rem; left: 1rem; }
 }
