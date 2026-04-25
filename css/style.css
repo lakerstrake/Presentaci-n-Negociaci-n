@@ -76,24 +76,26 @@ body {
 }
 
 /* Panels */
+/* Distribuimos mejor el texto: 55% texto, 45% imagen para dar más espacio a las explicaciones */
 .text-panel {
-    flex: 1;
-    padding: 5% 6%; /* Percentage padding scales automatically */
+    flex: 0 0 55%;
+    padding: 4% 5%; 
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start; /* Start from top so scrolling is natural */
     background-color: var(--bg-color);
     max-height: 100vh;
-    overflow-y: auto; /* Just in case screen is ridiculously small */
+    overflow-y: auto; /* Permite hacer scroll si el contenido es mucho */
 }
 
-/* Scrollbar for text panel if needed */
-.text-panel::-webkit-scrollbar { width: 6px; }
+/* Smooth custom scrollbar for text panel */
+.text-panel::-webkit-scrollbar { width: 8px; }
 .text-panel::-webkit-scrollbar-track { background: transparent; }
-.text-panel::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+.text-panel::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; border: 2px solid var(--bg-color); }
+.text-panel::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
 
 .image-panel {
-    flex: 1;
+    flex: 0 0 45%;
     background-size: cover;
     background-position: center;
     position: relative;
@@ -133,16 +135,17 @@ body {
 
 /* Typography */
 .subtitle {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     font-weight: 700;
     color: var(--text-muted);
     text-transform: uppercase;
     letter-spacing: 1.5px;
     margin-bottom: 0.5rem;
+    margin-top: 1rem;
 }
 
 .title {
-    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-size: clamp(2.2rem, 3.5vw, 3.5rem);
     font-weight: 800;
     color: var(--text-main);
     line-height: 1.1;
@@ -150,7 +153,7 @@ body {
 }
 
 .main-question {
-    font-size: clamp(1.4rem, 2.5vw, 2rem);
+    font-size: clamp(1.4rem, 2.2vw, 2.2rem);
     font-weight: 700;
     color: var(--primary-color);
     line-height: 1.25;
@@ -159,12 +162,13 @@ body {
 }
 
 .speaker-name {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     font-weight: 700;
     color: var(--primary-color);
     text-transform: uppercase;
     letter-spacing: 2px;
     margin-bottom: 1rem;
+    margin-top: 1rem;
 }
 
 .divider {
@@ -175,65 +179,81 @@ body {
 }
 
 .impact-quote {
-    font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+    font-size: clamp(1.1rem, 1.6vw, 1.4rem);
     font-weight: 400;
     color: var(--text-muted);
-    line-height: 1.5;
+    line-height: 1.6;
     border-left: 3px solid var(--border-color);
     padding-left: 1.2rem;
 }
 
 .text-body {
-    font-size: clamp(0.9rem, 1.2vw, 1.05rem);
+    font-size: clamp(0.95rem, 1.2vw, 1.1rem);
     line-height: 1.6;
     color: var(--text-main);
 }
 
 .text-body p {
-    margin-bottom: 0.8rem;
+    margin-bottom: 1rem;
 }
 
-/* Data Box - Compact */
+/* Data Box - Expanded with Logos */
 .data-box {
     margin-top: 1rem;
-    padding: 1rem 1.2rem;
+    padding: 1.2rem;
     background: var(--bg-alt);
-    border-radius: 6px;
+    border-radius: 8px;
     border-left: 4px solid var(--primary-color);
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
 }
 
 .data-box.alert { border-left-color: var(--accent-red); background: #fef2f2; }
 .data-box.success { border-left-color: var(--accent-green); background: #f0fdf4; }
 
+.data-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.company-logo {
+    height: 30px;
+    max-width: 120px;
+    object-fit: contain;
+}
+
 .data-title {
     font-weight: 700;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     color: var(--primary-color);
-    margin-bottom: 0.4rem;
 }
 
 .data-box.alert .data-title { color: var(--accent-red); }
 .data-box.success .data-title { color: var(--accent-green); }
 
 .data-box p {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     color: var(--text-muted);
-    margin-bottom: 0.4rem;
+    margin-bottom: 0;
+    line-height: 1.5;
 }
 
 .data-box strong { color: var(--text-main); }
 
 /* Compact Glossary List */
 .glossary-list {
-    margin-top: 0.8rem;
-    font-size: 0.8rem;
+    margin-top: 1.2rem;
+    font-size: 0.85rem;
     color: var(--text-muted);
+    margin-bottom: 2rem;
 }
 .glossary-list div {
-    margin-bottom: 0.3rem;
-    padding-left: 0.5rem;
+    margin-bottom: 0.4rem;
+    padding-left: 0.6rem;
     border-left: 2px solid var(--border-color);
 }
 .glossary-list strong { color: var(--primary-color); }
@@ -251,7 +271,7 @@ body {
 .controls-container {
     position: absolute;
     bottom: 2rem;
-    right: 2rem; /* Positioned on the right edge always */
+    right: 2rem;
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -296,8 +316,8 @@ body {
 /* Responsive Overrides */
 @media (max-width: 900px) {
     .split-layout { flex-direction: column !important; height: auto; min-height: 100vh; }
-    .text-panel { padding: 2rem 1.5rem 6rem 1.5rem; flex: none; height: auto; }
-    .image-panel { flex: none; height: 40vh; min-height: 250px; }
+    .text-panel { flex: none; width: 100%; padding: 2rem 1.5rem 6rem 1.5rem; height: auto; overflow-y: visible; }
+    .image-panel { flex: none; width: 100%; height: 40vh; min-height: 250px; }
     .controls-container { bottom: 1rem; right: 50%; transform: translateX(50%); }
     .chart-overlay { top: 1rem; left: 1rem; padding: 0.5rem 0.8rem; }
 }
